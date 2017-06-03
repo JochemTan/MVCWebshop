@@ -37,3 +37,8 @@ c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\bin\
 c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\bin\Newtonsoft.Json.xml
 c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\obj\Debug\MVCWebshop.dll
 c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\obj\Debug\MVCWebshop.pdb
+c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\bin\EntityFramework.dll
+c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\bin\EntityFramework.SqlServer.dll
+c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\bin\EntityFramework.xml
+c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\bin\EntityFramework.SqlServer.xml
+c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\obj\Debug\MVCWebshop.csprojResolveAssemblyReference.cache
