@@ -35,6 +35,5 @@ c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\bin\
 c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\bin\System.Web.WebPages.Razor.xml
 c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\bin\Antlr3.Runtime.pdb
 c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\bin\Newtonsoft.Json.xml
-c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\obj\Debug\MVCWebshop.csprojResolveAssemblyReference.cache
 c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\obj\Debug\MVCWebshop.dll
 c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\obj\Debug\MVCWebshop.pdb
