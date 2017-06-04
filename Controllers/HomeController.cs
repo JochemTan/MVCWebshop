@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCWebshop.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,20 @@ namespace MVCWebshop.Controllers
 {
     public class HomeController : Controller
     {
+        ShopEntities db = new ShopEntities();
+
+
         public ActionResult Index()
         {
-            return View();
+            HomeModel hm = new HomeModel();
+            List<Article> ArticleList = (from article in db.Articles select article).ToList();
+            List<Category> CategoryList = (from category in db.Categories select category).ToList();
+
+            hm.ArticleList = ArticleList;
+            hm.CategoryList = CategoryList;
+
+
+            return View(hm);
         }
 
         public ActionResult About()

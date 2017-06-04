@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
+@model MVCWebshop.Models.HomeModel
 <div class="row">
     <div class="col-md-9">
         <div class="jumbotron">
@@ -15,8 +15,12 @@
             <div class="panel-heading text">Categories</div>
             <div class="panel-body">
                 <div class="category">
-                    <div class="title text-left inline-text"><a href="#">A Category</a></div>
-                    <div class="number text-right">(14)</div>
+                    @foreach (var category in Model.CategoryList)
+                    {
+                        <div class="title text-left inline-text"><a href="#">@category.Title</a></div>
+                        <div class="number text-right">(@category.Articles.Count)</div>
+                    }
+                    
                 </div>
             </div>
         </div>
@@ -68,3 +72,7 @@
 </div>
 <br>
 <a href="#">see all products >></a>
+@foreach(var item in Model.ArticleList)
+{
+    <span>@item.Name</span>
+}
