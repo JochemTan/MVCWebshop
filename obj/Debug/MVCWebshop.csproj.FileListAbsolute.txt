@@ -41,4 +41,4 @@ c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\bin\
 c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\bin\EntityFramework.SqlServer.dll
 c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\bin\EntityFramework.xml
 c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\bin\EntityFramework.SqlServer.xml
-c:\users\jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\obj\Debug\MVCWebshop.csprojResolveAssemblyReference.cache
+C:\Users\Jochem\documents\visual studio 2015\Projects\MVCWebshop\MVCWebshop\obj\Debug\MVCWebshop.csprojResolveAssemblyReference.cache

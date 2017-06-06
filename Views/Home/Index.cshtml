@@ -29,50 +29,23 @@
 <p>Featured Products</p>
 <hr>
 <div class="row">
-    <div class="col-md-3">
-        <img src="~/Content/Images/placeholder-image.png" alt="placeholder image" class="img-responsive">
-        <p class="price">&euro; 299</p>
-        <div class="productDescription">
+    @foreach (var showArticle in Model.ArticleList)
+    {
+        <div class="col-md-3">
+            <img src="~/Content/Images/@showArticle.Image" alt="placeholder image" style="margin: 0px auto" class="img-responsive">
+            <p class="price">&euro; @showArticle.Price</p>
+            <div class="productDescription">
 
-            <h4>ProductName</h4>
-            <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu felis posuere, aliquet lacus vel, euismod massa.</p>
-            <!-- <div class="addToCartButton">
-                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-            </div> -->
+                <h4>@showArticle.Name</h4>
+                <p class="description">@showArticle.Description</p>
+                <!-- <div class="addToCartButton">
+                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                </div> -->
 
+            </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <img src="/Content/Images/placeholder-image.png" alt="placeholder image" class="img-responsive">
-        <p class="price">&euro; 299</p>
-        <div class="productDescription">
-
-            <h4>ProductName</h4>
-            <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu felis posuere, aliquet lacus vel, euismod massa.</p>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <img src="/Content/Images/placeholder-image.png" alt="placeholder image" class="img-responsive">
-        <p class="price">&euro; 299</p>
-        <div class="productDescription">
-
-            <h4>ProductName</h4>
-            <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu felis posuere, aliquet lacus vel, euismod massa.</p>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <img src="/Content/Images/placeholder-image.png" alt="placeholder image" class="img-responsive">
-        <p class="price">&euro; 299</p>
-        <div class="productDescription">
-
-            <h4>ProductName</h4>
-            <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu felis posuere, aliquet lacus vel, euismod massa.</p>
-        </div>
-    </div>
+    }
+    
 </div>
 <br>
 <a href="#">see all products >></a>
-@foreach(var item in Model.ArticleList)
-{
-    <span>@item.Name</span>
-}

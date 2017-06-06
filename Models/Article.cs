@@ -27,6 +27,7 @@ namespace MVCWebshop.Models
         public Nullable<int> Instock { get; set; }
         public Nullable<int> CategoryID { get; set; }
         public Nullable<int> SupplierID { get; set; }
+        public string Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Article_Order> Article_Order { get; set; }

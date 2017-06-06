@@ -42,8 +42,9 @@
 <head>
     <meta charset="UTF-8">
     <title>@ViewBag.Title</title>
-
+    
     @Styles.Render("~/Content/css")
+    <link href="~/Content/Site.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -62,8 +63,8 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li><li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li><a href="#">About</a></li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Articles", "Index", "Articles")</li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">

@@ -15,8 +15,8 @@ namespace MVCWebshop.Controllers
         public ActionResult Index()
         {
             HomeModel hm = new HomeModel();
-            List<Article> ArticleList = (from article in db.Articles select article).ToList();
-            List<Category> CategoryList = (from category in db.Categories select category).ToList();
+            List<Article> ArticleList = (from article in db.Articles select article).Take(4).ToList();
+            List<Category> CategoryList = (from category in db.Categories select category).Take(5).ToList();
 
             hm.ArticleList = ArticleList;
             hm.CategoryList = CategoryList;
