@@ -24,6 +24,12 @@ namespace MVCWebshop
                 url: "Articles",
                 defaults: new { controller = "Articles", action="FilterForm" }    
             );
+
+            routes.MapRoute(
+                name: "addToCart",
+                url: "Articles/addToCart",
+                defaults: new { controller = "Articles", action ="addToCart"}
+            );
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVCWebshop.Models;
+using MVCWebshop.Managers;
 
 namespace MVCWebshop.Controllers
 {
@@ -101,8 +102,63 @@ namespace MVCWebshop.Controllers
             return View("Index", hm);
         }
 
+        [HttpPost]
+        public ActionResult addToCart(int quantity, int ArticleID)
+        {
+            // this list will contain all the articles that are in the current session
+            List<Article> articleList = new List<Article>();
+            List<ShoppingCartModel> scmList = new List<ShoppingCartModel>();
+            Article article = db.Articles.Find(ArticleID);
+
+
+            // loops through the current session and places the articles in the article list
+            
+
+            if(SessionManager.CartList != null)
+            {
+                foreach (var cart in SessionManager.CartList)
+                {
+                    articleList.Add(cart.Article);
+                }
+
+                bool containItem = articleList.Any(item => item.ID == article.ID);
+                if (containItem)
+                {
+                    // if the article exists within the session
+                    SessionManager.CartList.FirstOrDefault(session => session.Article.ID == article.ID).Amount += quantity;
+                    
+                }
+                else
+                {
+                   
+                    ShoppingCartModel scm = new ShoppingCartModel();
+                    scm.Amount = quantity;
+                    scm.Article = article;
+
+                    scmList.Add(scm);
+
+                    SessionManager.CartList = scmList;
+                }
+
+            }
+            else
+            {
+                ShoppingCartModel scm = new ShoppingCartModel();
+                scm.Amount = quantity;
+                scm.Article = article;
+
+                scmList.Add(scm);
+                SessionManager.CartList = scmList;
+                
+            }
+
+            var s = SessionManager.CartList;
+            // create session object here
+            return View("Details",article);
+        }
        
-       
+
+    
 
     }
 }
