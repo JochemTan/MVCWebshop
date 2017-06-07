@@ -13,18 +13,22 @@ namespace MVCWebshop.Controllers
     public class ArticlesController : Controller
     {
         private ShopEntities db = new ShopEntities();
+        
 
         // GET: Articles
         public ActionResult Index()
         {
-            List<Article> ArticleList = (from article in db.Articles select article).Take(4).ToList();
+            HomeModel hm = new HomeModel();
+            hm.ArticleList = (from article in db.Articles select article).ToList();
+            hm.CategoryList = (from category in db.Categories select category).ToList();
             //var articles = db.Articles.Include(a => a.Category).Include(a => a.Supplier);
-            return View(ArticleList);
+            return View(hm);
         }
 
         // GET: Articles/Details/5
         public ActionResult Details(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -36,102 +40,69 @@ namespace MVCWebshop.Controllers
             }
             return View(article);
         }
+        
 
-        // GET: Articles/Create
-        public ActionResult Create()
-        {
-            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Title");
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "ID", "Name");
-            return View();
-        }
 
-        // POST: Articles/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Filter
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Description,Price,Instock,CategoryID,SupplierID,Image")] Article article)
+        public ActionResult FilterForm(int categoryId, int sortId)
         {
-            if (ModelState.IsValid)
+            HomeModel hm = new HomeModel();
+            int categoryID = categoryId;
+            int sortingID = sortId;
+
+
+
+            hm.ArticleList = null;
+            hm.CategoryList = (from category in db.Categories select category).ToList();
+
+            if (categoryID == 0 && sortingID == 0)
+                hm.ArticleList = (from a in db.Articles select a).ToList();
+
+            else
             {
-                db.Articles.Add(article);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                // if sorting is > 1 but category = 0 it crashes
+                switch (sortingID)
+                {
+                    case 0:
+                        hm.ArticleList = (from article in db.Articles where article.CategoryID == categoryID select article).ToList();
+                        break;
+                    case 1:
+                        if(categoryID > 0)
+                            hm.ArticleList = (from article in db.Articles where article.CategoryID == categoryID select article).OrderBy(a => a.Price).ToList();
+                        else
+                            hm.ArticleList = (from article in db.Articles select article).OrderBy(a => a.Price).ToList();
+                        break;
+                    case 2:
+                        if(categoryID > 0)
+                            hm.ArticleList = (from article in db.Articles where article.CategoryID == categoryID select article).OrderByDescending(a => a.Price).ToList();
+                        else
+                            hm.ArticleList = (from article in db.Articles select article).OrderByDescending(a => a.Price).ToList();
+                        break;
+                    case 3:
+                        if(categoryID > 0)
+                            hm.ArticleList = (from article in db.Articles where article.CategoryID == categoryID select article).OrderBy(a => a.Name).ToList();
+                        else
+                            hm.ArticleList = (from article in db.Articles select article).OrderBy(a => a.Name).ToList();
+                        break;
+                    case 4:
+                        if(categoryID > 0)
+                            hm.ArticleList = (from article in db.Articles where article.CategoryID == categoryID select article).OrderByDescending(a => a.Price).ToList();
+                        else
+                            hm.ArticleList = (from article in db.Articles  select article).OrderByDescending(a => a.Price).ToList();
+                        break;
+                    default:
+                        break;
+                }
+
             }
 
-            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Title", article.CategoryID);
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "ID", "Name", article.SupplierID);
-            return View(article);
+
+            return View("Index", hm);
         }
 
-        // GET: Articles/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Article article = db.Articles.Find(id);
-            if (article == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Title", article.CategoryID);
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "ID", "Name", article.SupplierID);
-            return View(article);
-        }
+       
+       
 
-        // POST: Articles/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Description,Price,Instock,CategoryID,SupplierID,Image")] Article article)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(article).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Title", article.CategoryID);
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "ID", "Name", article.SupplierID);
-            return View(article);
-        }
-
-        // GET: Articles/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Article article = db.Articles.Find(id);
-            if (article == null)
-            {
-                return HttpNotFound();
-            }
-            return View(article);
-        }
-
-        // POST: Articles/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Article article = db.Articles.Find(id);
-            db.Articles.Remove(article);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

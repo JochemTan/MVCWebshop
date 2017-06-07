@@ -18,6 +18,12 @@ namespace MVCWebshop
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Filter",
+                url: "Articles",
+                defaults: new { controller = "Articles", action="FilterForm" }    
+            );
         }
     }
 }

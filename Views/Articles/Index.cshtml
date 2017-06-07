@@ -1,41 +1,43 @@
-﻿@model IEnumerable<MVCWebshop.Models.Article>
+﻿@model MVCWebshop.Models.HomeModel
 
 
 <p>All products</p>
 <div class="filter">
     <h4>Filter options</h4>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("FilterForm","Articles", FormMethod.Post))
     {
         <div class="form-inline">
             <div class="form-group">
                 <label>Category</label>
-                <select class="form-control">
-                    <option>select a category...</option>
-                    <option>Phones</option>
-                    <option>Beers</option>
-                    <option>3</option>
+                <select name="categoryId" class="form-control">
+                    <option value="0">select a category...</option>
+                    @foreach (var category in Model.CategoryList)
+                    {
+                        <option value="@category.ID">@category.Title</option>
+                    }
                 </select>
             </div>
             <div class="form-group">
                 <label>Sorteer op:</label>
-                <select class="form-control">
-                    <option>sort option...</option>
-                    <option>Prijs Laag - Hoog</option>
-                    <option>Prijs Hoog - Laag</option>
-                    <option>Artikelnaam A - Z</option>
-                    <option>Artikelnaam Z - A</option>
+                <select name="sortId" class="form-control">
+                    <option value="0">sort option...</option>
+                    <option value="1">Prijs Laag - Hoog</option>
+                    <option value="2">Prijs Hoog - Laag</option>
+                    <option value="3">Artikelnaam A - Z</option>
+                    <option value="4">Artikelnaam Z - A</option>
 
                 </select>
             </div>
-            <div class="form-group"><button class="btn btn-primary">Search</button></div>
+            <div class="form-group"><button type="submit" class="btn btn-primary">Search</button></div>
         </div>
     }
 </div>
 
 <hr>
 <div class="row">
-@foreach (var article in Model)
+@foreach (var article in Model.ArticleList)
 {
+   
     <div class="col-md-3">
         <img src="~/Content/Images/@article.Image" alt="placeholder image" class="img-responsive " style="margin: 0px auto">
         <p class="price">&euro; @article.Price</p>
@@ -43,19 +45,12 @@
 
             <h4>@article.Name</h4>
             <p class="description">@article.Description</p>
-            <!-- <div class="addToCartButton">
-                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-            </div> -->
-
+            @Html.ActionLink("Read more","Details", "Articles", new {id = @article.ID }, null)  
         </div>
     </div>
+
 }
 </div>
-
-
-<br>
-<a href="#">see all products >></a>
-
-	</div>
+</div>
 <br>
 <br>
